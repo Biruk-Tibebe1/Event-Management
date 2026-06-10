@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="40" viewBox="0 0 160 40">
+  <rect width="160" height="40" rx="6" fill="#ffffff" />
+  <g font-family="Segoe UI, Roboto, Arial" font-size="14">
+    <text x="10" y="24" fill="#1b5e20" font-weight="700">Ethio</text>
+    <text x="55" y="24" fill="#ffb300" font-weight="700">Events</text>
+  </g>
+</svg>

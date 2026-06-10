@@ -1,0 +1,265 @@
+﻿<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habesh Events For Everyone | EthioEvents</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="/evertsphere/assets/css/auth.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            coffee: {
+              50: '#fdf8f3',
+              100: '#f5e6d3',
+              200: '#e8c9a0',
+              300: '#d4a574',
+              400: '#b8834f',
+              500: '#8B5E3C',
+              600: '#6B4226',
+              700: '#4A2C17',
+              800: '#33200F',
+              900: '#1F1409'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .font-heading { font-family: 'Playfair Display', serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .font-body { font-family: 'Source Sans 3', sans-serif; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fade-up { animation: fadeUp 0.8s ease forwards; }
+    .animate-fade-up-delay-1 { animation: fadeUp 0.8s ease 0.2s forwards; opacity: 0; }
+    .card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .card-hover:hover { transform: translateY(-8px) scale(1.02); }
+    .gold-gradient { background: linear-gradient(135deg, #b8834f, #8B5E3C, #6B4226); }
+    .dark-gradient { background: linear-gradient(180deg, #33200F 0%, #4A2C17 50%, #33200F 100%); }
+
+    /* Coffee theme background and utility classes (shared with events page) */
+    .app-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background:
+        radial-gradient(circle at 8% 10%, rgba(212, 164, 92, 0.28), transparent 28%),
+        radial-gradient(circle at 92% 12%, rgba(68, 36, 22, 0.38), transparent 24%),
+        linear-gradient(135deg, #2b1710 0%, #4b2818 42%, #7a4b2a 100%);
+      color: #fff7ea;
+    }
+
+    .coffee-pattern {
+      background-image:
+        linear-gradient(30deg, rgba(255,255,255,0.04) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.04) 87.5%, rgba(255,255,255,0.04)),
+        linear-gradient(150deg, rgba(255,255,255,0.04) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.04) 87.5%, rgba(255,255,255,0.04)),
+        linear-gradient(30deg, rgba(255,255,255,0.04) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.04) 87.5%, rgba(255,255,255,0.04)),
+        linear-gradient(150deg, rgba(255,255,255,0.04) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.04) 87.5%, rgba(255,255,255,0.04));
+      background-size: 52px 91px;
+      background-position: 0 0, 0 0, 26px 45px, 26px 45px;
+    }
+
+    .glass-panel {
+      background: rgba(255, 247, 234, 0.11);
+      border: 1px solid rgba(255, 231, 194, 0.2);
+      box-shadow: 0 24px 80px rgba(25, 12, 7, 0.35);
+      backdrop-filter: blur(18px);
+    }
+
+    .cream-card {
+      background: #fff7ea;
+      color: #2b1710;
+      box-shadow: 0 18px 45px rgba(25, 12, 7, 0.25);
+    }
+
+    .title-font { font-family: 'Fraunces', serif; }
+
+    .fade-up { animation: fadeUp 0.7s ease both; }
+    .delay-1 { animation-delay: 0.08s; }
+    .delay-2 { animation-delay: 0.16s; }
+    .delay-3 { animation-delay: 0.24s; }
+    .delay-4 { animation-delay: 0.32s; }
+
+    .status-dot { width: 10px; height: 10px; border-radius: 999px; display: inline-block; }
+
+    .modal-backdrop { background: rgba(25, 12, 7, 0.68); }
+    .hidden-soft { display: none; }
+
+    button, input, select, textarea { font: inherit; }
+    button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid #f2c879; outline-offset: 3px; }
+
+    .event-row { transition: transform 180ms ease, background 180ms ease; }
+    .event-row:hover { transform: translateX(4px); background: rgba(122, 75, 42, 0.08); }
+  </style>
+  </head>
+  <body class="min-h-screen font-body app-shell text-coffee-50">
+    <div class="site-root w-full min-h-screen flex flex-col">
+   <!-- Header -->
+   <header class="bg-coffee-700 text-coffee-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+     <div class="flex items-center gap-3">
+      <div class="w-10 h-10 bg-coffee-500 rounded-full flex items-center justify-center">
+       <i data-lucide="clapperboard" class="w-5 h-5 text-coffee-100"></i>
+      </div>
+      <a href="/evertsphere" class="font-display text-2xl font-bold">ኢትዮጵያ Events</a>
+     </div>
+     <nav class="hidden md:flex gap-6 text-coffee-200 text-sm font-medium">
+      <a href="/evertsphere" class="hover:text-white transition">Home</a>
+      <a href="/evertsphere/events" class="hover:text-white transition">Events</a>
+      <a href="/evertsphere/cinema" class="hover:text-white transition">Cinema</a>
+      <a href="/evertsphere/about.php" class="hover:text-white transition">About</a>
+     </nav>
+     <div class="hidden md:flex items-center gap-4">
+      <!-- zoom/fullscreen controls removed per design request -->
+                      <div class="relative group">
+          <button class="flex items-center gap-2 hover:text-white transition" aria-haspopup="true" aria-expanded="false">Biruk Tibebe Solomon <i data-lucide="chevron-down" class="w-4 h-4"></i></button>
+          <div class="absolute right-0 mt-2 w-48 bg-coffee-900 border border-coffee-700/30 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all group-menu" style="z-index:10000;">
+            <a href="/evertsphere/profile.php" class="block px-4 py-2 hover:bg-coffee-700/10 hover:text-white transition first:rounded-t-lg">Profile</a>
+            <!-- Bookings feature removed -->
+                          <a href="/evertsphere/admin/" class="block px-4 py-2 hover:bg-coffee-700/10 hover:text-white transition">Dashboard</a>
+                        <div class="border-t border-coffee-700/20"></div>
+            <a href="/evertsphere/logout.php" class="block px-4 py-2 hover:bg-coffee-700/10 hover:text-white transition last:rounded-b-lg">Logout</a>
+          </div>
+        </div>
+           </div>
+     <button id="mobile-menu-btn" class="md:hidden text-coffee-200"> <i data-lucide="menu" class="w-6 h-6"></i> </button>
+    </div>
+    </header>
+    <main class="w-full flex-1">
+     
+<section class="full-bleed bg-animated" style="position:relative;">
+  <div class="floating-orb" style="width:300px;height:300px;background:rgba(99,102,241,0.15);top:6%;left:6%;animation-delay:0s;"></div>
+  <div class="floating-orb" style="width:220px;height:220px;background:rgba(168,85,247,0.12);bottom:12%;right:8%;animation-delay:2s;"></div>
+  <div id="appRoot" class="app-shell coffee-pattern relative z-10">
+  <!-- Hero / Home Sections -->
+  <section id="homePage" class="site-hero full-bleed">
+    <div class="hero-inner">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <div class="fade-up">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f2c879]/15 border border-[#f2c879]/30 text-[#ffe7c2] font-bold mb-6">
+          <span class="status-dot bg-[#d4a45c]"></span> Welcome to Habeshan Events
+        </div>
+        <h1 id="heroTitle" class="hero-title title-font leading-tight font-extrabold">Celebrate Ethiopian Culture</h1>
+        <p id="heroSubtitle" class="hero-sub mt-5 text-lg sm:text-xl max-w-2xl leading-relaxed">Discover, manage, and join unforgettable events celebrating Ethiopian heritage. From traditional festivals to modern concerts, all in one place.</p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <button id="ctaButton" class="inline-flex items-center justify-center gap-2 rounded-full bg-[#d4a45c] text-[#2b1710] px-8 py-4 font-extrabold shadow-xl hover:scale-[1.02] hover:bg-[#f2c879] transition text-lg"> <i data-lucide="sparkles" aria-hidden="true"></i> <span>Explore Events</span> </button>
+        </div>
+      </div>
+
+      <div class="fade-up delay-1">
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#d4a45c]/20 to-[#7a4b2a]/20 rounded-[3rem]"></div>
+          <div class="cream-card rounded-[3rem] p-8 relative">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="rounded-2xl bg-[#f2c879]/35 p-6 text-center">
+                <p class="text-4xl font-black">2</p>
+                <p class="text-sm font-bold text-[#7a4b2a] mt-2">Events Hosted</p>
+              </div>
+              <div class="rounded-2xl bg-[#7a4b2a]/12 p-6 text-center">
+                <p class="text-4xl font-black">1</p>
+                <p class="text-sm font-bold text-[#7a4b2a] mt-2">Members</p>
+              </div>
+              <div class="rounded-2xl bg-[#7a4b2a]/12 p-6 text-center">
+                <p class="text-4xl font-black">0</p>
+                <p class="text-sm font-bold text-[#7a4b2a] mt-2">Organizers</p>
+              </div>
+              <div class="rounded-2xl bg-[#f2c879]/35 p-6 text-center">
+                <p class="text-4xl font-black">2</p>
+                <p class="text-sm font-bold text-[#7a4b2a] mt-2">Categories</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="site-container">    <!-- Featured events moved below in the main Events section to avoid duplication -->
+  </div>
+
+  <!-- Secondary sections (Events, Schedule, Cinema, About) are left as smaller sections below the main hero -->
+  <section id="eventsPage" class="page-section max-w-7xl mx-auto mt-8 px-5 sm:px-8 lg:px-10 fade-up delay-2">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <p class="uppercase tracking-[0.2em] text-[#f2c879] text-xs font-extrabold">Categories</p>
+        <h2 id="featuredTitle" class="title-font text-3xl sm:text-4xl font-extrabold text-[#fff7ea]">Featured Events</h2>
+      </div>
+      <div class="flex gap-2">
+        <button class="filter-btn rounded-full bg-[#d4a45c] text-[#2b1710] px-4 py-2 font-extrabold" data-filter="all">All</button>
+        <button class="filter-btn rounded-full bg-white/10 text-[#fff7ea] px-4 py-2 font-extrabold" data-filter="concert">Concert</button>
+        <button class="filter-btn rounded-full bg-white/10 text-[#fff7ea] px-4 py-2 font-extrabold" data-filter="festival">Festival</button>
+        <button class="filter-btn rounded-full bg-white/10 text-[#fff7ea] px-4 py-2 font-extrabold" data-filter="holiday">Holiday</button>
+        <button class="filter-btn rounded-full bg-white/10 text-[#fff7ea] px-4 py-2 font-extrabold" data-filter="national">National</button>
+      </div>
+    </div>
+
+    <div id="eventCards" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+          </div>
+  </section>
+
+  </div>
+</section>
+
+<script>
+  // App state (server-side values exposed to JS)
+  window.App = {
+    isLoggedIn: true,
+    isOrganizer: false,
+    baseUrl: '/evertsphere'
+  };
+
+  // Simple interactions
+  document.getElementById('ctaButton')?.addEventListener('click', () => { window.location.href = App.baseUrl + '/events'; });
+
+  document.querySelectorAll('.details-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const title = btn.dataset.title || '';
+      // Find the event id by matching title (best-effort) and redirect to details — fallback to events page
+      const link = App.baseUrl + '/events';
+      window.location.href = link;
+    });
+  });
+
+  // Filter events on the page
+  document.querySelectorAll('.filter-btn').forEach((button) => {
+    button.addEventListener('click', () => {
+      const filter = button.dataset.filter;
+      document.querySelectorAll('.filter-btn').forEach((btn) => { btn.classList.remove('bg-[#d4a45c]', 'text-[#2b1710]'); btn.classList.add('bg-white/10', 'text-[#fff7ea]'); });
+      button.classList.add('bg-[#d4a45c]', 'text-[#2b1710]');
+      button.classList.remove('bg-white/10', 'text-[#fff7ea]');
+      document.querySelectorAll('.event-card').forEach((card) => {
+        const shouldShow = filter === 'all' || (card.dataset.category || '') === filter;
+        card.style.display = shouldShow ? '' : 'none';
+      });
+    });
+  });
+
+  // Setup move to events page if nav uses buttons (header already has links)
+  document.getElementById('loginBtn')?.addEventListener('click', () => { window.location.href = App.baseUrl + '/login.php'; });
+  document.getElementById('registerBtn')?.addEventListener('click', () => { window.location.href = App.baseUrl + '/register.php'; });
+</script>
+
+  </div>  </main>
+  <!-- Footer -->
+  <footer class="bg-coffee-800 text-coffee-200 py-12 px-6 border-t border-coffee-700/20">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-2">
+        <i data-lucide="clapperboard" class="w-5 h-5"></i> <span class="font-display font-semibold">Ethiopian Events</span>
+      </div>
+      <p class="text-sm text-coffee-300">© 2024 Ethiopian Cultural Heritage Events. Celebrating ancient civilizations.</p>
+    </div>
+  </footer>
+  </div>
+<script src="/evertsphere/assets/js/site_events.js"></script>
+<script src="/evertsphere/assets/js/auth.js"></script>
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>
