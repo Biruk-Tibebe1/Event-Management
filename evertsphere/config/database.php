@@ -4,12 +4,10 @@
 define('DB_HOST', '127.0.0.1');
 define('DB_NAME', 'ethioevents');
 define('DB_USER', 'root');
-define('DB_PASS', '1234');
+define('DB_PASS', 'YOUR_PASSWORD');
 define('BASE_URL', '/evertsphere');
-// Optional: Google Maps API key. Leave empty to use OpenStreetMap/Leaflet fallback.
-if (!defined('GOOGLE_MAPS_API_KEY')) define('GOOGLE_MAPS_API_KEY', '');
 
-date_default_timezone_set('Africa/Addis_Ababa');
+date_default_timezone_set('YOUR_LOCATION');
 
 function get_db(): PDO {
     static $pdo = null;
